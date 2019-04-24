@@ -56,6 +56,17 @@ public class LibroResource {
         List<Libro> libros = dao.getLibro();
         return g.toJson(libros);
     }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("get/librosbyname")
+    public String getLibros(String nombre) throws SQLException{
+        Gson g = new Gson();
+        LibroDAO dao = new LibroDAO();
+        List<Libro> libros = dao.getLibroByName(nombre);
+        return g.toJson(libros);
+    }
+
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)

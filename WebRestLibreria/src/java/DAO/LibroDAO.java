@@ -37,4 +37,25 @@ public class LibroDAO {
         Conexion.CloseConexion();
         return libros;
     }
+    
+     public List<Libro> getLibroByName(String nombre) throws SQLException{
+        
+        List<Libro> libros = new ArrayList<>();
+        Libro unlibro = null;
+        sql = "SELECT * FROM Libros where nombre LIKE "+nombre;
+        con = Conexion.getConexion();
+        pst = con.prepareStatement(sql);
+        rs = pst.executeQuery();
+        while(rs.next()){
+            unlibro = new Libro();
+            unlibro.setId(rs.getInt("id"));
+            unlibro.setNombre(rs.getString("nombre"));
+            unlibro.setPrecio(rs.getInt("precio"));
+            unlibro.setStock(rs.getInt("stock"));
+            
+            libros.add(unlibro);
+        }
+        Conexion.CloseConexion();
+        return libros;
+    }
 }
