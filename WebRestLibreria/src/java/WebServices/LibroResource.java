@@ -17,6 +17,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -59,11 +60,11 @@ public class LibroResource {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("get/librosbyname")
-    public String getLibros(String nombre) throws SQLException{
+    @Path("get/librosbyname/{name}")
+    public String getLibrosbynombre(@PathParam("name") String name) throws SQLException{
         Gson g = new Gson();
         LibroDAO dao = new LibroDAO();
-        List<Libro> libros = dao.getLibroByName(nombre);
+        List<Libro> libros = dao.getLibroByName(name);
         return g.toJson(libros);
     }
 

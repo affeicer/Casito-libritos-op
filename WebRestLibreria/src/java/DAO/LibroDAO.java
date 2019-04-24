@@ -42,7 +42,7 @@ public class LibroDAO {
         
         List<Libro> libros = new ArrayList<>();
         Libro unlibro = null;
-        sql = "SELECT * FROM Libros where nombre LIKE "+nombre;
+        sql = "SELECT * FROM Libros where nombre LIKE '%"+nombre+"%'";
         con = Conexion.getConexion();
         pst = con.prepareStatement(sql);
         rs = pst.executeQuery();
